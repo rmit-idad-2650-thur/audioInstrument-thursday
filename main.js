@@ -64,7 +64,7 @@ function playNote(e){
     if(mouseButtonDown === true){
         synth.triggerAttack(note);
     }
-
+    console.log("shuffled");
 }
 
 function endNote(e){
@@ -86,3 +86,29 @@ key.addEventListener("mousedown", playNote);
 key.addEventListener("mouseenter", playNote);
 key.addEventListener("mouseup", endNote);
 key.addEventListener("mouseleave", endNote);
+
+// audio file playback
+const playbackButton = document.getElementById("playback-button");
+const audioTrack = document.getElementById("audio-track");
+
+function playPauseAudio(){
+    if(audioTrack.paused === true){
+        audioTrack.play();
+    } else {
+        audioTrack.pause();
+    }
+}
+
+playbackButton.addEventListener("click", playPauseAudio);
+
+// randomly scrub to location
+const randomButton = document.getElementById("random-location");
+
+// move playback to random position in audio file
+function randomLocation(){
+    // find duration
+    let trackLength = audioTrack.duration;
+    audioTrack.currentTime = trackLength * Math.random();
+}
+
+randomButton.addEventListener("click", randomLocation);
